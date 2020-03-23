@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "importance of procedural ruby"
-date:       2020-03-23 19:20:20 +0000
+date:       2020-03-23 15:20:21 -0400
 permalink:  importance_of_procedural_ruby
 ---
 
