@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Rails E-Haggle"
-date:       2020-07-13 23:56:41 +0000
+date:       2020-07-13 19:56:42 -0400
 permalink:  rails_e-haggle
 ---
 
@@ -188,7 +188,7 @@ we can drop to the rails console rails c and test the connection to the database
 [["LIMIT", 11]]
 
 --> authentication of our blog module right now we can create empty blogs so to prevent this we are going to use validations or constraints using the model file to enforce what can go into the database
-# another validation we wanna add is uselessness of blogs so we can enforce minimum length requirment for title and description
+ another validation we wanna add is uselessness of blogs so we can enforce minimum length requirment for title and description
 
 https://guides.rubyonrails.org/active_record_validations.html
 
