@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Big O notation"
-date:       2020-07-17 23:13:12 +0000
+date:       2020-07-17 19:13:13 -0400
 permalink:  big_o_notation
 ---
 
@@ -103,6 +103,9 @@ big o can compare 2 functions and figure out which one is better when it comes t
 so basically going back to our example what it means as the array increases how many functions or calculations do we have to do thats it! simple. this is what we call algorithmic effiency. 
 
 different functions have different algorithmic effiency. to simply put it for everyone as the number of elements increase what is the effiency so big o conerns us of how many steps or operations the computer has to perform. 
+
+so here we can say that our example is solved in (n) time or more spesifically linear time for whenever the number of elements increase the number of operations increase signafying the [O(n) time] notation or [linear time]. 
+
 
 cheers ! 
 
