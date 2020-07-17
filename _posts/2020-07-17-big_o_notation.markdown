@@ -29,7 +29,8 @@ so as coders we are the ones that give the recipe where recipe here is the code 
 
 say my recipe looks something like this and here im going to use javascript because in the curriculm that's the next section we are working on and i want to get some practice with it but feel free to use any language you are comfortable with. 
 
-**const nemo = ['nemo'];
+```
+const nemo = ['nemo'];
 function findNemo(array) {
 for (let i = 0; i <array.length; i++) {
   if (array[i] === 'nemo') {
@@ -39,15 +40,17 @@ for (let i = 0; i <array.length; i++) {
 
 }
 
+```
 findNemo(nemo);**
 
 so here we are looping over an array and checking the array index of [i] where i is 0 is true than console log an output.
 
 so how long did it take to run this code how can we measure the performance of this code and what happens if our array is made out of more than just one string, well for this example lets measure the performance if we only have one string in the array we can do this to calculate the speed of our function, where we use performance.now() in the loop and console log it out to see the speed 
 
+```
 const nemo = ['nemo'];
 
-**
+
 function findNemo(array) {
   let t0 = performance.now();
   for (let i = 0; i < array.length; i++) {
@@ -58,7 +61,8 @@ function findNemo(array) {
   let t1 = performance.now();
   console.log("Call to find Nemo took " + (t1 - t0) + " milliseconds.");
 }
-**
+
+```
 this is the output 
 Found NEMO!
 Call to find Nemo took 0.19500000053085387 milliseconds.
@@ -66,7 +70,8 @@ Call to find Nemo took 0.19500000053085387 milliseconds.
 
 now assume we have a big array  instead of finding nemo 
 assuming its 10 fishes 
-**
+
+```
 const fish = ['dory', 'bruce', 'marlin', 'nemo'];
 const nemo = ['nemo'];
 const everyone = ['dory', 'bruce', 'marlin', 'nemo', 'gill', 'bloat', 'nigel', 'squirt', 'darla', 'hank'];
@@ -83,11 +88,14 @@ function findNemo2(fish) {
   console.log("Call to find Nemo took " + (t1 - t0) + " milliseconds.");
 }
 
-findNemo2(everyone)**
+findNemo2(everyone)
+```
 
 this still outputs 0.1 milliseconds because in this day and age our computers are extremly fast but lets up this a notch or 2 or maybe a thousand
 
+```
 const large = new Array(1000).fill('nemo');
+```
 add this to the code and check out the reults, this will take around 7 milliseconds or so which compared to 0.1 milliseconds is a lot longer so here the outcome is as our input grew our functions became slower and slower 
 
 our runtime increased! 
