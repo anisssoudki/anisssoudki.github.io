@@ -1,14 +1,21 @@
 ---
 layout: post
 title:      "big O notation of o(n^2)"
-date:       2020-07-23 23:52:53 +0000
+date:       2020-07-23 19:52:54 -0400
 permalink:  big_o_notation_of_o_n_2
 ---
 
 
 we have seen in the last blog the o(n) notation and that is implemented when we have some sort of looping going around.
 
-so now lets see if we have 2 loops going around what is the big o notation there. for that to calculate big o we mulitply the notation of every loop, so if i have 2 loops with every one having a big o notation of o(n), the overall big o will be o(n^2) o of n squared 
+so now lets see if we have 2 loops going around what is the big o notation there. for that to calculate big o we mulitply the notation of every loop, so if i have 2 nested loops with every one having a big o notation of o(n), the overall big o will be o(n^2) o of n squared like we said before o(n) is linear o of n(squared) is gonna be quadratic time.
+
+
+the line on an a graph should shoot up on the y axis in this example. 
+so the rule of thumb here a databse has o(1)
+a loop big o is o(n)
+a nested loop notation is o(n^2) the more nesting the higher the power.
+
 
 ```
 // log all pairs
