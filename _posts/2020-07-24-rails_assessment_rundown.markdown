@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Rails assessment rundown"
-date:       2020-07-24 22:56:11 +0000
+date:       2020-07-24 18:56:12 -0400
 permalink:  rails_assessment_rundown
 ---
 
@@ -388,7 +388,114 @@ in this case appointment would be the joint table and in the table itself it wil
 
 
 
-to be continued 
+we can associate the nested form with fields_for method inside of the form, this method is given to us through the has_many macro that we set up inside of the model so for example in this case if we say that a comment belongs to a post and a post has_many comments, the has_many will provide us with the relationship so we can use fields_for.  
+also assume you are in a many to many meaning you have a joint table lets make an example 
+
+products categories and a joint table productcategories or you can name it whatever you want the set up for this will be the following 
+
+
+
+```
+class Product < ApplicationRecord
+     has_many :product_categories
+    has_many :categories, through: :product_categories
+		end
+		
+		
+		class ProductCategory < ApplicationRecord
+		this is the joint table 
+		
+    belongs_to :product
+    belongs_to :category
+  end
+		
+		class Category < ApplicationRecord
+      has_many :product_categories
+      has_many :products, through: :product_categories
+  end
+		
+```
+
+so in here fields for will work when we pass in the joint table's attributes inside of the products strong params or the categories strong params, and we do that like the following example 
+```
+ def product_params
+        params.require(:product).permit(:name, :price, :description, :image, product_categories_attributes: [:id, :category_id, :like])       
+        
+      end
+```
+notice that instead of passing categories i passed in the joint table with the category_id attribute which is the foreign key for the categories table, so if you are confused about that, this is how its done by passing in the joint table in the params thats why we have it why not take advantage of what we have right ! 
+
+after this is set up in the controller now we will have access to fields for inside of the form and we can set 
+
+```
+<%= f.fields_for :product_categories do |product_category|%>
+than in here call the variable in the pipes to do some code basically your going to wanna pass in the attributes
+<%=product_category.collection_select( :category_id, Category.all, :id, :name, prompt: true) %>
+see here im passing in attributes for categories not even for the joint table but im doing it while using the information in the joint table just by calling category_id (ie: the foreign key inside of the joint table) 
+```
+
+also remember to inform the model that (hey we do accept nested attributes for the joint table u can use the rails macro or make our own method this will be important if we want our fields_for method to properly nest the values. 
+
+```
+either 
+accepts_nested_attributes_for :product_categories
+or 
+
+manually defined (accepts_nested_attribute_method)
+ 
+    def product_categories_attributes=(attributes)
+      attributes.values.each do |hash| 
+        pc = ProductCategory.find_by(product_id: self.id, category_id: hash[:category_id]) 
+          if pc && pc.id
+            pc.update(hash)
+          else 
+            pc = ProductCategory.new(hash)
+            self.product_categories << pc 
+          end 
+      end  
+    end
+```
+also remember to call the build method inside of the new action in the controller that the model belongs to so in this case will be the product controller, we can do it the other way around if we do the syntax for the build method will be different for the first case it will be the following
+
+```
+case 1 build the belongs to 
+@product.productcategories.build
+case 2
+build the has many 
+@productcategory.build_product
+```
+
+i tried to put this the way i understood it if you feel like you understand it better or maybe im confused on something, please let me know this was a hard concept to grasp, i tried to do my best on it, i also found our cohort lead documentation on this subject to be great and included it in the resources
+
+
+
+# 19. Are nested routes and the forms on those nested routes connected in any way? How do we use a nested route to help set up our form?
+
+nested routes and nested forms are completly seperate. for one nested forms help in submitting an attribute through a form, and it is way different than a nested route because nested route doesnt deal with attributes submission or anything of that sort. 
+
+a nested route is a route inside of another route, for example i can have a url/users/1/products 
+so here if you notice the product route is nested inside of the user's route, we can make it to where its nested only inside of the users show route by using macros like only or except inside of the routes file in the config folder we can have multiple nested routes like a triple or quadriple nested route.
+
+```
+resources :goal do
+  resources :task do
+    resources :subtask do 
+		member do 
+		put "quadriple nested route" => "subtask#quadriple nested route"
+		end
+  end
+ end
+```
+
+basically member of a route is one route inside of the triple route that does something and more logic is needed for the controller and the view to actually set this up but a simple example to show that we can have infinte nested routes, and it doesnt mean its a good thing. now combining this with the nested forms can get complex, and you can probably google your way through an example but they are independant of eachother, its just the idea that where do i want my form to post if i have a nested route, so if you have that down, it should be easy.
+
+
+# this is a huge blog and it took around 4 hours for me to write because i was confused on some stuff but it was very helpful, i hope it helps anyone that uses it as a reference 
+cheers!!! 
+Aniss 
+
+
+
 
 
 
@@ -403,3 +510,5 @@ https://learn.co/tracks/online-software-engineering-structured/rails/intro-to-ac
 https://api.rubyonrails.org/v3.2.14/classes/ActionView/Helpers/UrlHelper.html#method-i-_routes_context
 https://medium.com/@michellekwong2/form-tag-vs-form-for-vs-form-with-fa6e0ac73aac
 https://edgeguides.rubyonrails.org/active_record_validations.html
+
+https://docs.google.com/presentation/d/1rmJof0a74Vne8bVpSkK8wyLv9jof9lFvV5sKYJZzUjo/edit#slide=id.g77f242b508_0_85
