@@ -8,10 +8,10 @@ permalink:  kitchen_my_react-redux_capstone_app
 
 
 
-*** React from scratch ***
+##### *** React from scratch ***
 
 
-**jsx, components,props, state**
+***jsx, components,props, state***
 
 *app component -> produces jsx and handles user events
 jsx -> set of instructions to tell react what content to render on the screen*
@@ -72,7 +72,7 @@ React takes the jsx and updates content on the screen
 conditanel rendering content for example if our api is having a problem we can put a condition where it says if someprop is null show a loading div or an error message if our api didnt fetch correctly
 
 ***lifecycle methods 
-component lifecycle timeline *
+component lifecycle timeline ***
 
 constructor -> if we dont specify a consturctor will be created for us ->good to do one time setup
 render -> optional its the only method required 
